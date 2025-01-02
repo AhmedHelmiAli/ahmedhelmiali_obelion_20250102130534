@@ -4,11 +4,6 @@ class Task extends Model {
   static init(sequelize) {
     super.init(
       {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
         title: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -18,14 +13,12 @@ class Task extends Model {
         },
         description: {
           type: DataTypes.TEXT,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-          },
+          allowNull: true,
         },
-        dueDate: {
-          type: DataTypes.DATE,
+        completed: {
+          type: DataTypes.BOOLEAN,
           allowNull: false,
+          defaultValue: false,
         },
       },
       {

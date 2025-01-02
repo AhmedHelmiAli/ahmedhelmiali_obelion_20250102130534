@@ -4,6 +4,7 @@ const sequelize = new Sequelize('helmi', 'root', 'root', {
   host: 'db',
   port: 3306,
   dialect: 'mysql',
+  logging: false,
 });
 
 class Task extends Model {
@@ -12,8 +13,8 @@ class Task extends Model {
       {
         id: {
           type: DataTypes.INTEGER,
-          primaryKey: true,
           autoIncrement: true,
+          primaryKey: true,
         },
         title: {
           type: DataTypes.STRING,
@@ -24,14 +25,12 @@ class Task extends Model {
         },
         description: {
           type: DataTypes.TEXT,
-          allowNull: false,
-          validate: {
-            notEmpty: true,
-          },
+          allowNull: true,
         },
-        dueDate: {
-          type: DataTypes.DATE,
+        completed: {
+          type: DataTypes.BOOLEAN,
           allowNull: false,
+          defaultValue: false,
         },
       },
       {
@@ -43,5 +42,7 @@ class Task extends Model {
     );
   }
 }
+
+Task.init(sequelize);
 
 module.exports = Task;

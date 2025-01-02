@@ -1,49 +1,79 @@
 const Task = require('../models/TaskModel');
 
-exports.getTasks = async (req, res) => {
+// Update the completion status of a task
+exports.updateTaskCompletion = async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+
+  try {
+    const task = await Task.findByPk(id);
+    
+    if (!task) {
+      return res.status(404).json({ success: false, message: 'Task not found' });
+    }
+
+    task.completed = completed;
+    await task.save();
+
+    res.json({ success: true, task });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error updating task status', error: error.message });
+  }
+};
+
+// Get all tasks
+exports.getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.findAll();
-    res.status(200).json(tasks);
+    res.json({ success: true, tasks });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch tasks' });
+    res.status(500).json({ success: false, message: 'Error fetching tasks', error: error.message });
   }
 };
 
-exports.createTask = async (req, res) => {
-  const { title, description, dueDate } = req.body;
-  try {
-    const newTask = await Task.create({ title, description, dueDate });
-    res.status(201).json(newTask);
-  } catch (error) {
-    res.status(400).json({ error: 'Failed to create task' });
-  }
-};
-
-exports.updateTask = async (req, res) => {
+// Get a single task by ID
+exports.getTaskById = async (req, res) => {
   const { id } = req.params;
-  const { title, description, dueDate } = req.body;
+
   try {
     const task = await Task.findByPk(id);
+
     if (!task) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ success: false, message: 'Task not found' });
     }
-    await task.update({ title, description, dueDate });
-    res.status(200).json(task);
+
+    res.json({ success: true, task });
   } catch (error) {
-    res.status(400).json({ error: 'Failed to update task' });
+    res.status(500).json({ success: false, message: 'Error fetching task', error: error.message });
   }
 };
 
+// Create a new task
+exports.createTask = async (req, res) => {
+  const { title, description } = req.body;
+
+  try {
+    const task = await Task.create({ title, description, completed: false });
+    res.status(201).json({ success: true, task });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Error creating task', error: error.message });
+  }
+};
+
+// Delete a task by ID
 exports.deleteTask = async (req, res) => {
   const { id } = req.params;
+
   try {
     const task = await Task.findByPk(id);
+
     if (!task) {
-      return res.status(404).json({ error: 'Task not found' });
+      return res.status(404).json({ success: false, message: 'Task not found' });
     }
+
     await task.destroy();
-    res.status(204).send();
+    res.json({ success: true, message: 'Task deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete task' });
+    res.status(500).json({ success: false, message: 'Error deleting task', error: error.message });
   }
 };
