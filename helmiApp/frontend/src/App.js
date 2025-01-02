@@ -3,8 +3,7 @@ import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import AddTask from './components/AddTask/AddTask.js';
 import TaskList from './components/TaskList/TaskList.js';
 import CompleteTask from './components/CompleteTask/CompleteTask.js';
-import Login from './components/Login/Login.js';
-import Register from './components/Register/Register.js';
+
 
 // Authentication Context
 const AuthContext = createContext();
@@ -92,8 +91,7 @@ const App = () => {
           </nav>
           <main style={{ flex: '1' }}>
             <Routes>
-              <Route path="/login" element={<PublicRoute><Login onLoginSuccess={login} /></PublicRoute>} />
-              <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+           
               <Route path="/tasks" element={<ProtectedRoute><TaskList /></ProtectedRoute>} />
               <Route path="/add-task" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
               <Route path="/complete-task" element={<ProtectedRoute><CompleteTask /></ProtectedRoute>} />
