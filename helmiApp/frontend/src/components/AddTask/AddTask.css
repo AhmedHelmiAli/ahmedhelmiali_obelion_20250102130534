@@ -1,0 +1,94 @@
+.AddTask-add-task-container {
+  background-color: #ddd;
+  font-family: 'Lora', serif;
+  color: #ccd;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.AddTask-header {
+  background-color: #eed;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.AddTask-logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.AddTask-nav-tabs {
+  display: flex;
+  gap: 15px;
+}
+
+.AddTask-nav-tab {
+  color: #ccd;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.AddTask-main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.AddTask-task-form {
+  background-color: #ffe;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.AddTask-form-field {
+  margin-bottom: 15px;
+}
+
+.AddTask-form-field label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.AddTask-form-field input,
+.AddTask-form-field textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccd;
+  border-radius: 5px;
+  font-family: 'Lora', serif;
+}
+
+.AddTask-add-task-button {
+  background-color: #ffe;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.AddTask-footer {
+  background-color: #eed;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddTask-footer-link {
+  color: #ccd;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.AddTask-footer-text {
+  font-size: 14px;
+  color: #ccd;
+}
