@@ -1,0 +1,108 @@
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ddd;
+  font-family: 'Lora', serif;
+  color: #ccd;
+  padding: 20px;
+}
+
+.task-list-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.task-list-logo {
+  max-width: 100px;
+}
+
+.task-list-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.task-list-tab {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #ccd;
+  font-weight: bold;
+}
+
+.task-list-main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 800px;
+  background-color: #ffe;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-item {
+  background-color: #eed;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-title {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.task-description {
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+.task-due-date {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.task-action-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ccd;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.task-action-button:hover {
+  background-color: #bbb;
+}
+
+.task-list-aside {
+  margin: 20px 0;
+}
+
+.task-list-link {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #ccd;
+}
+
+.task-list-footer {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.task-list-footer-link {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #ccd;
+}

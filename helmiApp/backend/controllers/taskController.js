@@ -1,72 +1,48 @@
 const Task = require('../models/TaskModel');
 
-// Create a new task
-exports.createTask = async (req, res) => {
-  try {
-    const { title, description, dueDate } = req.body;
-    const newTask = await Task.create({ title, description, dueDate });
-    res.status(201).json(newTask);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to create task' });
-  }
-};
-
-// Retrieve all tasks
 exports.getTasks = async (req, res) => {
   try {
     const tasks = await Task.findAll();
     res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve tasks' });
+    res.status(500).json({ error: 'Failed to fetch tasks' });
   }
 };
 
-// Retrieve a single task by ID
-exports.getTaskById = async (req, res) => {
+exports.createTask = async (req, res) => {
+  const { title, description, dueDate } = req.body;
   try {
-    const { id } = req.params;
-    const task = await Task.findByPk(id);
-    if (task) {
-      res.status(200).json(task);
-    } else {
-      res.status(404).json({ error: 'Task not found' });
-    }
+    const newTask = await Task.create({ title, description, dueDate });
+    res.status(201).json(newTask);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve task' });
+    res.status(400).json({ error: 'Failed to create task' });
   }
 };
 
-// Update an existing task
 exports.updateTask = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, dueDate } = req.body;
   try {
-    const { id } = req.params;
-    const { title, description, dueDate } = req.body;
     const task = await Task.findByPk(id);
-    if (task) {
-      task.title = title;
-      task.description = description;
-      task.dueDate = dueDate;
-      await task.save();
-      res.status(200).json(task);
-    } else {
-      res.status(404).json({ error: 'Task not found' });
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
     }
+    await task.update({ title, description, dueDate });
+    res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update task' });
+    res.status(400).json({ error: 'Failed to update task' });
   }
 };
 
-// Delete a task
 exports.deleteTask = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const task = await Task.findByPk(id);
-    if (task) {
-      await task.destroy();
-      res.status(200).json({ message: 'Task deleted successfully' });
-    } else {
-      res.status(404).json({ error: 'Task not found' });
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
     }
+    await task.destroy();
+    res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete task' });
   }
